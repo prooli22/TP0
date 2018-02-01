@@ -12,14 +12,25 @@ from Regle import Regle
 '''
 
 import sys
-#from Grille import Grille
+from Grille import Grille
 
 def main():
-    nb_etapes = sys.argv[1]
-    config = open('config.txt', 'r')
-    regles = open('rules.txt', 'r')
+    # S'il n'y a pas d'arguments on met 10 par défaut.
+    try:
+        nb_etapes = sys.argv[1]
+    except IndexError:
+        nb_etapes = 10
 
-    print(config.read())
-    print(regles.read())
+    config = open('config.txt', 'r').read().splitlines()
+    regles = open('rules.txt', 'r').read().splitlines()
+
+    hauteur = int(config[0].split(',')[0])
+    largeur = int(config[0].split(',')[1])
+
+    grille = Grille(hauteur, largeur)
+    grille.imprimer()
+
+    grille.initialiser(config)
+    grille.imprimer()
 
 main()
