@@ -21,6 +21,7 @@ def main():
     except IndexError:
         nb_etapes = 10
 
+    #ùtest
     config = open('config.txt', 'r').read().splitlines()
     regles = open('rules.txt', 'r').read().splitlines()
 
