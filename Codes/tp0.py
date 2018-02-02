@@ -21,13 +21,13 @@ def main():
     except IndexError:
         nb_etapes = 10
 
-    #ùtest
     config = open('config.txt', 'r').read().splitlines()
     regles = open('rules.txt', 'r').read().splitlines()
 
     hauteur = int(config[0].split(',')[0])
     largeur = int(config[0].split(',')[1])
 
+    # À PARTIR D'ICI TU PEUX MODIFIER
     grille = Grille(hauteur, largeur)
     grille.imprimer()
 
