@@ -34,36 +34,36 @@ class Grille:
            2 |x| 6
            3  4  5
         '''
-        if (i != 0 & j != 0 ):
-            if(self._Grille[i-1][j-1] == couleur):
+        if(i > 0 and j > 0):
+            if(self._Grille[i - 1][j - 1] == couleur):
                 nb_voisins += 1
 
-        if(j != 0):
-            if(self._Grille[i][j-1] == couleur):
+        if(j > 0):
+            if(self._Grille[i][j - 1] == couleur):
                 nb_voisins += 1
 
-        if(i < len(self._Grille) & j != 0):
-            if(self._Grille[i+1][j-1] == couleur):
+        if(i < len(self._Grille) - 1 and j > 0):
+            if(self._Grille[i + 1][j - 1] == couleur):
                 nb_voisins += 1
 
-        if(i < len(self._Grille)):
-            if(self._Grille[i+1][j] == couleur):
+        if(i < len(self._Grille) - 1):
+            if(self._Grille[i + 1][j] == couleur):
                 nb_voisins += 1
 
-        if(i < len(self._Grille) & j < len(self._Grille[i])):
-            if(self._Grille[i+1][j+1]] == couleur):
+        if(i < len(self._Grille) - 1 and j < len(self._Grille[i]) - 1):
+            if(self._Grille[i + 1][j + 1] == couleur):
                 nb_voisins += 1
 
-        if(j < len(self._Grille[i])):
-            if(self._Grille[i][j+1] == couleur):
+        if(j < len(self._Grille[i]) - 1):
+            if(self._Grille[i][j + 1] == couleur):
                 nb_voisins += 1
 
-        if(i != 0 & j < len(self._Grille[i])):
-            if(self._Grille[i-1][j+1] == couleur):
+        if(i > 0 and j < len(self._Grille[i]) - 1):
+            if(self._Grille[i - 1][j + 1] == couleur):
                 nb_voisins += 1
 
-        if(i != 0):
-            if(self._Grille[i-1][j] == couleur):
+        if(i > 0):
+            if(self._Grille[i - 1][j] == couleur):
                 nb_voisins += 1
 
         return nb_voisins
@@ -73,87 +73,52 @@ class Grille:
         for i in range(len(self._Grille)):
             for j in range(len(self._Grille[i])):
 
-                nb_voisins = self._nbVoisins(i,j)
-                '''Si la cellule du tableau est vide, on regarde si elle peut naitre (a), 
-                   dans le bon ordre (B-Y-R-G)
-                   '''
-                if (self._Grille[i][j] == '.'):
-                    '''Enlever l'ordre pré-défini'''
-                    for k in range(0, len(regles)):
-                        if (nb_voisins >= int(regles[k].split(',')[1]):
-                            self._Grille[i][j]= str(regles[k].split(':')[0])
-
-                '''Si la cellule contient un organisme, on regarde s'il survit ou meurt selon 
-                   les règles de l'organisme en question, soit entre b et c
-                '''
-                elif(self._Grille[i][j] == 'B'):
-                    if((nb_voisins < int(regles[0].split(',').[0].split(':')[1]) & (nb_voisins > int(regles[0].split(',').[2]) ):
-                        self._Grille[i][j] = '.'
-
-                elif(self._Grille[i][j] == 'Y'):
-                    if((nb_voisins < int(regles[1].split(',').[0].split(':')[1]) & (nb_voisins > int(regles[1].split(',').[2]) ):
-                        self._Grille[i][j] = '.'
-
-                elif(self._Grille[i][j] == 'R'):
-                    if((nb_voisins < int(regles[2].split(',').[0].split(':')[1]) & (nb_voisins > int(regles[2].split(',').[2]) ):
-                        self._Grille[i][j] = '.'
-
-                else(self._Grille[i][j] == 'G'):
-                    if((nb_voisins < int(regles[3].split(',').[0].split(':')[1]) & (nb_voisins > int(regles[3].split(',').[2]) ):
-                        self._Grille[i][j] = '.'
-        return
-
-    def simulation_test(self, regles):
-        '''On balaye le tableau au complet un nombre nb_etapes de fois'''
-        for i in range(len(self._Grille)):
-            for j in range(len(self._Grille[i])):
-
                 '''Si la cellule du tableau est vide, on regarde si elle peut naitre (a), 
                    dans le bon ordre (B-Y-R-G)'''
                 if (self._Grille[i][j] == self.organisme.Morte):
                     # Organisme Blue
                     if (self._nbVoisins(i, j, self.organisme.B) >= regles.B.a):
-                        self._Grille[i][j] = self.organisme.B)
+                        self._Grille[i][j] = self.organisme.B
 
                     # Organisme Yellow
-                    elif(self._nbVoisins(i, j, self.organisme.Y) >= regles.Y.a)
-                        self._Grille[i][j] = self.organisme.Y)
+                    elif (self._nbVoisins(i, j, self.organisme.Y) >= regles.Y.a):
+                        self._Grille[i][j] = self.organisme.Y
 
                     # Orgamisme Red
-                    elif(self._nbVoisins(i, j, self.organisme.R) >= regles.R.a)
-                        self._Grille[i][j] = self.organisme.R)
+                    elif (self._nbVoisins(i, j, self.organisme.R) >= regles.R.a):
+                        self._Grille[i][j] = self.organisme.R
 
                     # Orgasnisme Green
-                    elif(self._nbVoisins(i, j, self.organisme.G) >= regles.G.a)
-                        self._Grille[i][j] = self.organisme.G)
+                    elif (self._nbVoisins(i, j, self.organisme.G) >= regles.G.a):
+                        self._Grille[i][j] = self.organisme.G
 
-                '''Si la cellule contient un organisme, on regarde s'il survit ou meurt selon 
-                   les règles de l'organisme en question, soit entre b et c'''
                 else:
+                    '''Si la cellule contient un organisme, on regarde s'il survit ou meurt selon 
+                       les règles de l'organisme en question, soit entre b et c'''
 
                     # On met la couleur dans une variable pour ne pas l'accéder à chaque fois
                     couleur = self._Grille[i][j]
 
                     # Organisme Blue                    
-                    if(couleur == self.organisme.B):
+                    if (couleur == self.organisme.B):
                         nb_voisinsB = self._nbVoisins(i, j, couleur)
-                        if(nb_voisins < regles.B.b & nb_voisins > regles.B.c):
+                        if(nb_voisinsB < regles.B.b and nb_voisinsB > regles.B.c):
                             self._Grille[i][j] = self.organisme.Morte
                     
                     # Organisme Yellow
-                    elif(couleur == self.organisme.Y):
+                    elif (couleur == self.organisme.Y):
                         nb_voisinsY = self._nbVoisins(i, j, couleur)
-                        if(nb_voisins < regles.Y.b & nb_voisins > regles.Y.c):
+                        if(nb_voisinsY < regles.Y.b and nb_voisinsY > regles.Y.c):
                             self._Grille[i][j] = self.organisme.Morte
 
                     # Orgamisme Red
-                    elif(couleur == self.organisme.R):
+                    elif (couleur == self.organisme.R):
                         nb_voisinsR = self._nbVoisins(i, j, couleur)
-                        if(nb_voisins < regles.R.b & nb_voisins > regles.R.c):
+                        if(nb_voisinsR < regles.R.b and nb_voisinsR > regles.R.c):
                             self._Grille[i][j] = self.organisme.Morte
 
                     # Orgasnisme Green
-                    elif(couleur == self.organisme.G):
+                    elif (couleur == self.organisme.G):
                         nb_voisinsG = self._nbVoisins(i, j, couleur)
-                        if(nb_voisins < regles.G.b & nb_voisins > regles.G.c):
+                        if(nb_voisinsG < regles.G.b and nb_voisinsG > regles.G.c):
                             self._Grille[i][j] = self.organisme.Morte
