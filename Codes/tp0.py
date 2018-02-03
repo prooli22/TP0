@@ -27,11 +27,13 @@ def main():
     hauteur = int(config[0].split(',')[0])
     largeur = int(config[0].split(',')[1])
 
-    # À PARTIR D'ICI TU PEUX MODIFIER
     grille = Grille(hauteur, largeur)
     grille.imprimer()
 
     grille.initialiser(config)
     grille.imprimer()
+
+
+
 
 main()
