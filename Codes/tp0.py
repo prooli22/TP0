@@ -13,6 +13,7 @@ from Regle import Regle
 
 import sys
 from Grille import Grille
+from Regle import Regle
 
 def main():
     # S'il n'y a pas d'arguments on met 10 par défaut.
@@ -28,12 +29,14 @@ def main():
     largeur = int(config[0].split(',')[1])
 
     grille = Grille(hauteur, largeur)
-    grille.imprimer()
 
-    grille.initialiser(config)
-    grille.imprimer()
+    regle = Regle(regles)
 
+    '''
     for sim in range(nb_etapes):
         grille.simulation(regles)
+    '''
+
+    print (regle.regleDict)
 
 main()
