@@ -33,7 +33,7 @@ def main():
     grille.initialiser(config)
     grille.imprimer()
 
-
-
+    for sim in range(nb_etapes):
+        grille.simulation(regles)
 
 main()
