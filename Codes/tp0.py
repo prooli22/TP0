@@ -11,11 +11,13 @@ from Grille import Grille
 from Regle import Regles
 
 def main():
-    # S'il n'y a pas d'arguments on met 10 par défaut.
-    try:
-        nb_etapes = int(sys.argv[1])
-    except IndexError:
-        nb_etapes = 10
+    # try:
+    #     nb_etapes = int(sys.argv[1])
+    # except IndexError:
+    #     print("Veuillez entrer un argument, fin de l'exécution")
+    #     return
+
+    nb_etapes = int(open('arg.txt', 'r').read())
 
     config = open('config.txt', 'r').read().splitlines()
     regles = open('rules.txt', 'r').read().splitlines()
@@ -29,8 +31,12 @@ def main():
     grille.initialiser(config)
 
     for sim in range(nb_etapes):
+        #grille.imprimer()
         grille.simulation(regle)
     
     grille.imprimer()
 
-main()
+#main()
+
+def test(arg):
+    main()
