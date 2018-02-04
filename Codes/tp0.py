@@ -7,17 +7,31 @@
 '''
 
 import sys
+from termcolor import colored, cprint
 from Grille import Grille
 from Regle import Regles
 
 def main():
-    # try:
-    #     nb_etapes = int(sys.argv[1])
-    # except IndexError:
-    #     print("Veuillez entrer un argument, fin de l'exécution")
-    #     return
 
-    nb_etapes = int(open('arg.txt', 'r').read())
+    animation = False
+    couleur = False
+
+    try:
+        if(sys.argv[1] == '-animation'):
+            animation = True
+
+        elif(sys.argv[1] == '-couleur'):
+            couleur = True
+        
+        else:
+            nb_etapes = int(sys.argv[1])
+
+    except IndexError:
+        print("Veuillez entrer un argument avant l'exécution, fin du programme.")
+        return
+
+    # Pour les tests      
+    #nb_etapes = int(open('arg.txt', 'r').read())
 
     config = open('config.txt', 'r').read().splitlines()
     regles = open('rules.txt', 'r').read().splitlines()
@@ -26,17 +40,24 @@ def main():
     largeur = int(config[0].split(',')[1])
 
     grille = Grille(hauteur, largeur)
-    regle = Regles(regles)
-    
     grille.initialiser(config)
+    regle = Regles(regles)
 
-    for sim in range(nb_etapes):
-        #grille.imprimer()
-        grille.simulation(regle)
+    if(animation or couleur):
+        while(True):
+            grille.simulation(regle)
+            grille.imprimer(couleur)
+            input('\nAppuyez sur la touche <Enter> pour simuler une autre étape ...')
+            print('\n\n\n\n\n')
+
+    else:
+        for sim in range(nb_etapes):
+            grille.simulation(regle)
     
-    grille.imprimer()
+        grille.imprimer(couleur)
 
-#main()
+main()
 
+# Pour les tests
 def test(arg):
     main()

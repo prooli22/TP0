@@ -13,6 +13,6 @@ class Organisme:
         self.Y = 'Y'
         self.R = 'R'
         self.G = 'G'
-        self.Mort = '.'
+        self.Vide = '.'
 
 
