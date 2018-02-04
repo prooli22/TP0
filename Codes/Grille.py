@@ -6,6 +6,7 @@
               Moïka Sauvé     (20090119)
 '''
 
+# Permet d'afficher des couleurs dans la console.
 from termcolor import colored, cprint
 from Organisme import Organisme
 
@@ -16,18 +17,23 @@ class Grille:
     def __init__(self, i, j):
         self._Grille = [['.' for x in range(j)] for y in range(i)]
 
+    def initialiser(self, config):
+        for i in range(1, len(config)):
+            k = config[i].split(',')
+            self._Grille[int(k[1])][int(k[2])] = str(k[0])
+
     def _changerCouleur(self, i, j):
         if(self._Grille[i][j] == self.organisme.B):
-            self._Grille[i][j] = colored('#', 'blue')
+            self._Grille[i][j] = self.organisme.cB
 
-        elif(self._Grille[i][j] == self.organisme.Y):
-            self._Grille[i][j] = colored('#', 'yellow')
+        if(self._Grille[i][j] == self.organisme.Y):
+            self._Grille[i][j] = self.organisme.cY
 
-        elif(self._Grille[i][j] == self.organisme.R):
-            self._Grille[i][j] = colored('#', 'red')
+        if(self._Grille[i][j] == self.organisme.R):
+            self._Grille[i][j] = self.organisme.cR
 
-        elif(self._Grille[i][j] == self.organisme.G):
-            self._Grille[i][j] = colored('#', 'green')
+        if(self._Grille[i][j] == self.organisme.G):
+            self._Grille[i][j] = self.organisme.cG
 
     def imprimer(self, couleur):
         for i in range(len(self._Grille)):
@@ -38,11 +44,6 @@ class Grille:
 
                 print(self._Grille[i][j] + ' ', end='')
             print()
-
-    def initialiser(self, config):
-        for i in range(1, len(config)):
-            k = config[i].split(',')
-            self._Grille[int(k[1])][int(k[2])] = str(k[0])
 
     def _nbVoisins(self, i, j):
         nb_voisins = 0
@@ -120,21 +121,21 @@ class Grille:
                     couleur = self._Grille[i][j]
 
                     # Organisme Blue                    
-                    if (couleur == self.organisme.B):
+                    if (couleur == self.organisme.B or couleur == self.organisme.cB):
                         if(nb_voisins < regles.B.b or nb_voisins > regles.B.c):
                             self._Grille[i][j] = self.organisme.Vide
                     
                     # Organisme Yellow
-                    elif (couleur == self.organisme.Y):
+                    elif (couleur == self.organisme.Y or couleur == self.organisme.cY):
                         if(nb_voisins < regles.Y.b or nb_voisins > regles.Y.c):
                             self._Grille[i][j] = self.organisme.Vide
 
                     # Orgamisme Red
-                    elif (couleur == self.organisme.R):
+                    elif (couleur == self.organisme.R or couleur == self.organisme.cR):
                         if(nb_voisins < regles.R.b or nb_voisins > regles.R.c):
                             self._Grille[i][j] = self.organisme.Vide
 
                     # Orgasnisme Green
-                    elif (couleur == self.organisme.G):
+                    elif (couleur == self.organisme.G or couleur == self.organisme.cG):
                         if(nb_voisins < regles.G.b or nb_voisins > regles.G.c):
                             self._Grille[i][j] = self.organisme.Vide

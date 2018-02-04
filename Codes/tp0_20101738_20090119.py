@@ -7,7 +7,6 @@
 '''
 
 import sys
-from termcolor import colored, cprint
 from Grille import Grille
 from Regle import Regles
 
